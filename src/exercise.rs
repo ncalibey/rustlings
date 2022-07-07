@@ -152,6 +152,8 @@ path = "{}.rs""#,
                     .output()
                     .expect("Failed to run 'cargo clean'");
                 Command::new("cargo")
+                    .env("RUSTC_WRAPPER", "")
+                    .env("RUSTC_WORKSPACE_WRAPPER", "sccache")
                     .args(&["clippy", "--manifest-path", CLIPPY_CARGO_TOML_PATH])
                     .args(RUSTC_COLOR_ARGS)
                     .args(&["--", "-D", "warnings","-D","clippy::float_cmp"])
